@@ -5,16 +5,17 @@
     <title>Java 2 Web Apps</title>
 </head>
 <body>
-<h1><%= "Java 2 Web Apps" %>
-</h1>
+<h1>Java 2 Web Apps</h1>
 <ul>
-    <li>Week 5
+    <li>Weeks 5-6
         <ul>
             <li><a href="hello-servlet">Hello Servlet</a></li>
             <li><a href="my-calculator">My Calculator</a></li>
             <li><a href="temp-converter">Temperature Converter</a></li>
+            <li><a href="fraction">Fraction Calculator</a></li>
         </ul>
     </li>
 </ul>
+
 </body>
 </html>
