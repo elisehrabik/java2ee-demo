@@ -14,6 +14,7 @@
             <li><a href="temp-converter">Temperature Converter</a></li>
             <li><a href="fraction">Fraction Calculator</a></li>
             <li><a href="volume">Volume Calculator</a></li>
+            <li><a href="kg-to-lb">Kilograms to Pounds Calculator</a></li>
         </ul>
     </li>
 </ul>
