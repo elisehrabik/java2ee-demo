@@ -39,6 +39,11 @@ public class VolumeServlet extends HttpServlet {
             request.setAttribute("error", e.getMessage());
         }
 
+        // Set the radius and height attributes to retain the input values
+        // Used ChatGPT to figure out why/how to send back to the POST method to keep data after refresh
+        request.setAttribute("radius", radiusStr);
+        request.setAttribute("height", heightStr);
+
         // Forward the request back to volume.jsp for output display
         request.getRequestDispatcher("volume.jsp").forward(request, response);
     }

@@ -41,6 +41,6 @@ public class Cylinder {
     public String toString() {
         double radius = base.getRadius();
         double volume = getVolume();
-        return String.format("%.2f * π * %.2f = %.1f", height, radius, volume);
+        return Helpers.round(height, 2) + " * π * " + Helpers.round(radius, 2) + " = " + Helpers.round(volume, 2);
     }
 }
