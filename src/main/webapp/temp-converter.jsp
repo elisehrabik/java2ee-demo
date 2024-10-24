@@ -24,6 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="main-nav.jsp"%>
 <h1>Temperature Converter</h1>
 <div class="container my-4">
     <div class="row">
