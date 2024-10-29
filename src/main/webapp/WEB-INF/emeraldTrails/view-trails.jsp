@@ -56,9 +56,7 @@
     <!-- Cards -->
     <div class="card-container">
         <%
-            // Retrieve the list of trails set in the request
             List<Trail> trails = (List<Trail>) request.getAttribute("trails");
-            // Iterate over the trails and create a card for each
             for (Trail trail : trails) {
         %>
         <sl-card class="card-overview">
@@ -71,16 +69,16 @@
             <small style="color:gray"><%= trail.getTrailDistance() %> miles | <%= trail.getTrailDifficulty() %></small><br/>
             <p><%= trail.getTrailDescription() %></p>
         </sl-card>
-        <% } %> <!-- Close the loop here -->
+        <% } %>
     </div>
 
-<!-- Styles -->
+<!-- Styles for cards -->
 <style>
     .card-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic columns with min width */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1rem;
-        margin: 0 5rem ;
+        margin: 0 10rem ;
         align-items: stretch;
 
     }
@@ -88,11 +86,11 @@
         margin: auto;
         display: flex;
         flex-direction: column;
-        min-height: 500px;
+        min-height: 400px;
     }
     .card-overview img {
-        max-width: 100%; /* Ensure the image does not exceed the card width */
-        height: auto; /* Maintain aspect ratio */
+        max-width: 100%;
+        height: auto;
     }
     </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
