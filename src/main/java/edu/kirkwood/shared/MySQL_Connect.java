@@ -10,7 +10,26 @@ public class MySQL_Connect {
     public static Connection getConnection() {
         Dotenv dotenv = Dotenv.load();
         String driver = dotenv.get("DB_DRIVER");
-        String url = dotenv.get("DB_URL");
+        String url = dotenv.get("DB_URL1");
+        String user = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+        try {
+            Class.forName(driver);
+        } catch(ClassNotFoundException e) {
+            throw new RuntimeException("DB driver not found");
+        }
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            return connection;
+        } catch(SQLException e) {
+            throw new RuntimeException("Could not connect to database - " + e.getMessage());
+        }
+    }
+
+    public static Connection getConnection2() {
+        Dotenv dotenv = Dotenv.load();
+        String driver = dotenv.get("DB_DRIVER");
+        String url = dotenv.get("DB_URL2");
         String user = dotenv.get("DB_USER");
         String password = dotenv.get("DB_PASSWORD");
         try {
@@ -28,5 +47,6 @@ public class MySQL_Connect {
 
     public static void main(String[] args) {
         getConnection();
+        getConnection2();
     }
 }

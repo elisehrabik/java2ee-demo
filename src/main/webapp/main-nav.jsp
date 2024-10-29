@@ -31,6 +31,14 @@
                         <li><a class="dropdown-item" href="customers">Customers - Admin</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Emerald Trails
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="view-trails">View Trails</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
