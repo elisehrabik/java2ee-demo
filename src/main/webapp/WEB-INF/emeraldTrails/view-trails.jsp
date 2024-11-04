@@ -1,6 +1,9 @@
 <%@ page import="edu.kirkwood.emeraldTrails.model.Trail" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<fmt:setLocale value="en-US" />
 <!doctype html>
 <html lang="en">
 
@@ -26,31 +29,18 @@
 <!-- Cards -->
 <div class="container">
     <div class="row">
-        <%
-            List<Trail> trails = (List<Trail>) request.getAttribute("trails");
-            if (trails == null || trails.isEmpty()) {
-        %>
-        <div class="col-12">
-            <p class="text-center">No trails available.</p>
-        </div>
-        <%
-        } else {
-            for (Trail trail : trails) {
-        %>
+    <c:forEach items="${trails}" var="trail">
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="<%= trail.getTrail_image() %>" class="card-img-top" alt="<%=trail.getTrail_name()%> hiking trail at Emerald Park.">
+                <img src="${trail.trail_image}" class="card-img-top" alt="${trail.trail_name} hiking trail at Emerald Park.">
                 <div class="card-body">
-                    <h5 class="card-title"><%= trail.getTrail_name() %> Trail</h5>
-                    <p class="card-text"><small class="text-muted"><%= trail.getTrail_distance() %> miles | <%= trail.getTrail_difficulty() %></small></p>
-                    <p class="card-text"><%= trail.getTrail_description() %></p>
+                    <h5 class="card-title">${trail.trail_name} Trail</h5>
+                    <p class="card-text"><small class="text-muted">${trail.trail_distance} miles | ${trail.trail_difficulty}</small></p>
+                    <p class="card-text">${trail.trail_description}</p>
                 </div>
             </div>
         </div>
-        <%
-                }
-            }
-        %>
+    </c:forEach>
     </div>
 </div>
 
