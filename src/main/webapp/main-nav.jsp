@@ -37,6 +37,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="view-trails">View Trails</a></li>
+                        <li><a class="dropdown-item" href="trails">Admin: Trails</a></li>
+                        <li><a class="dropdown-item" href="maintenance">Admin: Maintenance</a></li>
+                        <li><a class="dropdown-item" href="reviews">Admin: Reviews</a></li>
+                        <li><a class="dropdown-item" href="visitors">Admin: Visitors</a></li>
                     </ul>
                 </li>
             </ul>
