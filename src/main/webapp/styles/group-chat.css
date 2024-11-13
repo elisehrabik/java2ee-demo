@@ -1,0 +1,32 @@
+#messageOutput {
+    border: 1px solid black;
+    height: 300px;
+    padding: 10px;
+    overflow-y: auto;
+}
+#messageOutput div {
+    margin-bottom: 10px;
+}
+#messageOutput p {
+    padding: 5px 10px;
+    margin: 0;
+    border-radius: 10px;
+}
+#messageOutput span {
+    padding: 5px;
+    font-size: 12px;
+    font-style: italic;
+}
+#messageOutput .in {
+    margin-right: 100px;
+}
+#messageOutput .in p {
+    background-color: hsl(210, 0%, 70%);
+}
+#messageOutput .out {
+    margin-left: 100px;
+}
+#messageOutput .out p {
+    background-color: hsl(210, 100%, 50%);
+    color: white;
+}
