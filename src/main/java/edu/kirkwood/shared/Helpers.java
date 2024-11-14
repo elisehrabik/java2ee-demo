@@ -23,5 +23,6 @@ public class Helpers {
     public static String html2text(String html) {
         return Jsoup.parse(html).text();
     }
+
 }
 

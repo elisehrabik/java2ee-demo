@@ -1,4 +1,4 @@
-package edu.kirkwood.shared;
+package edu.kirkwood.shared.email;
 
 import com.azure.communication.email.EmailClient;
 import com.azure.communication.email.EmailClientBuilder;
@@ -8,6 +8,8 @@ import com.azure.communication.email.models.EmailMessage;
 import com.azure.communication.email.models.EmailSendResult;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
+import edu.kirkwood.shared.Helpers;
+import edu.kirkwood.shared.Validators;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class AzureEmail {
@@ -21,7 +23,7 @@ public class AzureEmail {
         return emailClient;
     }
 
-    public static String sendEmail(String toEmailAddress, String subject, String bodyHTML) {
+    public static String sendEmail(String toEmailAddress, String subject, String bodyHTML, String replyTo) {
         EmailClient emailClient = getEmailClient();
         EmailAddress toAddress = new EmailAddress(toEmailAddress);
         String body = Helpers.html2text(bodyHTML);
@@ -30,7 +32,8 @@ public class AzureEmail {
                 .setToRecipients(toAddress)
                 .setSubject(subject)
                 .setBodyPlainText(body)
-                .setBodyHtml(bodyHTML);
+                .setBodyHtml(bodyHTML)
+                .setReplyTo(new EmailAddress(replyTo));
 
         SyncPoller<EmailSendResult, EmailSendResult> poller = null;
         try {
@@ -45,11 +48,11 @@ public class AzureEmail {
 
 
     public static void main(String[] args) {
-        // Pretend this is your doPost method in a servlet
         // Get all parameters
         String toEmailAddress = "ellie.hrabik@gmail.com"; // Use your own email address
         String subject = "Testing";
         String bodyHTML = "<h2>This is a test email</h2><p>Testing, Testing, Testing</p>";
+        String replyTo = "elise.hrabik@gmail.com";
         // Set the parameters as attribute
 
         // Validate the user inputs
@@ -71,27 +74,27 @@ public class AzureEmail {
             System.out.println("Body is required");
             error = true;
         }
-        //
 
         if(!error) {
-            EmailThread emailThread1 = new EmailThread(toEmailAddress, subject, bodyHTML);
+            // Second thread is commented out to only send email to admin email
+            //EmailThread emailThread2 = new EmailThread(toEmailAddress, subject, bodyHTML, replyTo);
+            //emailThread2.start();
+            EmailThread emailThread1 = new EmailThread((Dotenv.load().get("ADMIN_EMAIL")), subject, bodyHTML, replyTo);
             emailThread1.start();
-            EmailThread emailThread2 = new EmailThread("elise.hrabik@gmail.com", subject, bodyHTML);
-            emailThread2.start();
             try {
                 emailThread1.join();
-                emailThread2.join();
+                //emailThread2.join();
             } catch (InterruptedException e) {
 
             }
             String errorMessage1 = emailThread1.getErrorMessage();
-            String errorMessage2 = emailThread2.getErrorMessage();
-            if (errorMessage1.isEmpty() && errorMessage2.isEmpty()) {
+            //String errorMessage2 = emailThread2.getErrorMessage(); && errorMessage2.isEmpty()
+            if (errorMessage1.isEmpty()) {
                 // Set a success attribute
-                System.out.println("Message sent to " + toEmailAddress);
+                System.out.println("Message sent to " + (Dotenv.load().get("ADMIN_EMAIL")));
             } else {
                 // Set an error attribute
-                System.out.println("Message not sent to " + toEmailAddress + " - " + errorMessage1);
+                System.out.println("Message not sent to " + (Dotenv.load().get("ADMIN_EMAIL")) + " - " + errorMessage1);
             }
         }
         // Forward req/resp to a JSP

@@ -16,4 +16,15 @@ class ValidatorsTest {
         assertFalse(Validators.isANumber(""));
         assertFalse(Validators.isANumber(" "));
     }
+
+    @Test
+    void isValidEmail() {
+        assertTrue(Validators.isValidEmail("elise.hrabik@gmail.com"));
+        assertTrue(Validators.isValidEmail("elise-2@student.edu"));
+        assertTrue(Validators.isValidEmail("elise_@hotmail.com"));
+        assertTrue(Validators.isValidEmail("elise@yahoo.org"));
+        assertFalse(Validators.isValidEmail("elise.hrabik.com"));
+        assertFalse(Validators.isValidEmail("elise.hrabik.edu"));
+        assertFalse(Validators.isValidEmail("elise hrabik@gmail.com"));
+    }
 }

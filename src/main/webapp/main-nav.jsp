@@ -33,6 +33,15 @@
                 </li>
                 <li class="nav-item dropdown">
                     <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Weeks 10-11
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="contact">Contact</a></li>
+                        <li><a class="dropdown-item" href="group-chat">Group Chat</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Emerald Trails
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">

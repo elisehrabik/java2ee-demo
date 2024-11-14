@@ -15,7 +15,8 @@ public class Validators {
 
     // Source: Google Gemini
     public static boolean isValidEmail(String email) {
-        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        // https://chatgpt.com/share/67354b3b-fe64-8006-9ff3-35f5346d7aec
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();

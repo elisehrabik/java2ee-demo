@@ -15,4 +15,15 @@ class HelpersTest {
         assertEquals("1.5", Helpers.round(1.54,1));
         assertEquals("1.6", Helpers.round(1.55,1));
     }
+
+    @Test
+    void html2text() {
+        assertEquals ("hello world", Helpers.html2text("<h2>hello world</h2>"));
+        assertEquals("hello world", Helpers.html2text("<div><p>hello</p> <p>world</p></div>"));
+        assertEquals("hello world", Helpers.html2text("<span class='greeting'>hello world</span>"));
+        assertEquals("", Helpers.html2text(""));
+        assertEquals("hello world", Helpers.html2text("hello world"));
+        assertEquals("hello < world", Helpers.html2text("hello < world"));
+    }
+
 }
