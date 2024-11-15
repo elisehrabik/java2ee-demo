@@ -59,14 +59,17 @@
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="text" class="form-control" id="email" name= "toEmailAddress" value="<%= toEmailAddress %>">
+                    <div style="color: red;"><%= emailError %></div>
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
                     <input type="text" class="form-control" id="subject" name= "subject" value="<%= subject %>">
+                    <div style="color: red;"><%= subjectError %></div>
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea class="form-control" id="message" name="bodyHTML" rows="5"><%= bodyHTML %></textarea>
+                    <div style="color: red;"><%= messageBodyError %></div>
                 </div>
                 <button type="submit" class="btn btn-primary submit-btn mt-2">Send</button>
             </form>
@@ -74,7 +77,6 @@
             <div id="errorText" class="alert alert-danger d-none" role="alert"></div>
             <!-- Message Placeholder -->
             <!-- <div id="messages"></div> -->
-            <div style="color: red;"><%= emailError %><br><%= subjectError %><br><%= messageBodyError %></div>
             <div style="color: green;"><%= messageSuccess %></div>
 
         </div>

@@ -52,32 +52,39 @@ public class ContactServlet extends HttpServlet {
             error = true;
         }
 
-        req.setAttribute("emailError", emailError);
-        req.setAttribute("subjectError", subjectError);
-        req.setAttribute("messageBodyError", messageBodyError);
+        if (error) {
 
-        if(!error) {
-            EmailThread emailThread1 = new EmailThread(toEmailAddress, subject, bodyHTML, replyTo);
-            emailThread1.start();
-            EmailThread emailThread2 = new EmailThread("elise.hrabik@gmail.com", subject, bodyHTML, replyTo);
-            emailThread2.start();
+            req.setAttribute("emailError", emailError);
+            req.setAttribute("subjectError", subjectError);
+            req.setAttribute("messageBodyError", messageBodyError);
+            req.getRequestDispatcher("contact.jsp").forward(req, resp);
+            return;
+        }
+
+        req.setAttribute("toEmailAddress", null);
+        req.setAttribute("subject", null);
+        req.setAttribute("bodyHTML", null);
+
+        EmailThread emailThread1 = new EmailThread(toEmailAddress, subject, bodyHTML, replyTo);
+        emailThread1.start();
+        EmailThread emailThread2 = new EmailThread("elise.hrabik@gmail.com", subject, bodyHTML, replyTo);
+        emailThread2.start();
+
             try {
                 emailThread1.join();
                 emailThread2.join();
             } catch (InterruptedException e) {
                 e.printStackTrace(); // given as automatic suggestion from Intellij
             }
+
             String errorMessage1 = emailThread1.getErrorMessage();
             String errorMessage2 = emailThread2.getErrorMessage();
+
             if (errorMessage1.isEmpty() && errorMessage2.isEmpty()) {
                 req.setAttribute("messageSuccess","Message sent!");
-                req.getRequestDispatcher("contact.jsp").forward(req, resp);
-                return;
             } else {
                 req.setAttribute("emailError", "Message not sent. " + errorMessage1);
-                req.getRequestDispatcher("contact.jsp").forward(req, resp);
             }
-        }
         // Forward req/resp to a JSP
         req.getRequestDispatcher("contact.jsp").forward(req, resp);
     }

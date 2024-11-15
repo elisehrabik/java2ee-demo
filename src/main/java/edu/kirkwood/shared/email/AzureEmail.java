@@ -29,7 +29,7 @@ public class AzureEmail {
         String body = Helpers.html2text(bodyHTML);
         EmailMessage emailMessage = new EmailMessage()
                 .setSenderAddress(Dotenv.load().get("AZURE_EMAIL_FROM"))
-                .setToRecipients(toAddress)
+                .setToRecipients(Dotenv.load().get("ADMIN_EMAIL"))
                 .setSubject(subject)
                 .setBodyPlainText(body)
                 .setBodyHtml(bodyHTML)
