@@ -26,5 +26,8 @@ class ValidatorsTest {
         assertFalse(Validators.isValidEmail("elise.hrabik.com"));
         assertFalse(Validators.isValidEmail("elise.hrabik.edu"));
         assertFalse(Validators.isValidEmail("elise hrabik@gmail.com"));
+        assertFalse(Validators.isValidEmail("e"));
+        assertFalse(Validators.isValidEmail("e@h"));
+        assertFalse(Validators.isValidEmail(""));
     }
 }

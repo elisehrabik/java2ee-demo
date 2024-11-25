@@ -3,24 +3,15 @@ package edu.kirkwood.ecommerce.model;
 public class Vendor {
     private String vend_id;
     private String vend_name;
-    private String vend_address;
-    private String vend_city;
-    private String vend_state;
-    private String vend_zip;
-    private String vend_country;
+    private Address address;
 
     public Vendor() {
-
     }
 
-    public Vendor(String vend_id, String vend_name, String vend_address, String vend_city, String vend_state, String vend_zip, String vend_country) {
+    public Vendor(String vend_id, String vend_name, Address address) {
         this.vend_id = vend_id;
         this.vend_name = vend_name;
-        this.vend_address = vend_address;
-        this.vend_city = vend_city;
-        this.vend_state = vend_state;
-        this.vend_zip = vend_zip;
-        this.vend_country = vend_country;
+        this.address = address;
     }
 
     public String getVend_id() {
@@ -28,6 +19,9 @@ public class Vendor {
     }
 
     public void setVend_id(String vend_id) {
+        if(vend_id == null || vend_id.strip().length() == 0) {
+            throw new IllegalArgumentException("Vendor ID is required");
+        }
         this.vend_id = vend_id;
     }
 
@@ -36,59 +30,29 @@ public class Vendor {
     }
 
     public void setVend_name(String vend_name) {
+        if(vend_name == null || vend_name.strip().length() == 0) {
+            throw new IllegalArgumentException("Vendor Name is required");
+        }
         this.vend_name = vend_name;
     }
 
-    public String getVend_address() {
-        return vend_address;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setVend_address(String vend_address) {
-        this.vend_address = vend_address;
-    }
-
-    public String getVend_city() {
-        return vend_city;
-    }
-
-    public void setVend_city(String vend_city) {
-        this.vend_city = vend_city;
-    }
-
-    public String getVend_state() {
-        return vend_state;
-    }
-
-    public void setVend_state(String vend_state) {
-        this.vend_state = vend_state;
-    }
-
-    public String getVend_zip() {
-        return vend_zip;
-    }
-
-    public void setVend_zip(String vend_zip) {
-        this.vend_zip = vend_zip;
-    }
-
-    public String getVend_country() {
-        return vend_country;
-    }
-
-    public void setVend_country(String vend_country) {
-        this.vend_country = vend_country;
+    public void setAddress(Address address) {
+        if(address == null) {
+            throw new IllegalArgumentException("Address is required");
+        }
+        this.address = address;
     }
 
     @Override
     public String toString() {
         return "Vendor{" +
-                "vend_id=" + vend_id +
+                "vend_id='" + vend_id + '\'' +
                 ", vend_name='" + vend_name + '\'' +
-                ", vend_address='" + vend_address + '\'' +
-                ", vend_city='" + vend_city + '\'' +
-                ", vend_state='" + vend_state + '\'' +
-                ", vend_zip=" + vend_zip +
-                ", vend_country='" + vend_country + '\'' +
+                ", address=" + address +
                 '}';
     }
 }

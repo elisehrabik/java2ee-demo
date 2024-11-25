@@ -14,6 +14,7 @@
 <body>
 <%@ include file="../../main-nav.jsp"%>
 <div class="container py-4">
+    <a href="add-vendor" class="btn btn-primary" role="button">Add New Vendor</a>
     <h2>Admin - All Vendors</h2>
     <div class="table-responsive small">
         <table class="table table-striped table-sm">
@@ -37,11 +38,11 @@
                     </td>
                     <td>${vendor.vend_id}</td>
                     <td><a href="view-vendor?vend_id=${vendor.vend_id}">${vendor.vend_name}</a></td>
-                    <td>${vendor.vend_address}</td>
-                    <td>${vendor.vend_city}</td>
-                    <td>${vendor.vend_state}</td>
-                    <td>${vendor.vend_zip}</td>
-                    <td>${vendor.vend_country}</td>
+                    <td>${vendor.address.address}</td>
+                    <td>${vendor.address.city}</td>
+                    <td>${vendor.address.state}</td>
+                    <td>${vendor.address.zip}</td>
+                    <td>${vendor.address.country}</td>
                 </tr>
             </c:forEach>
             </tbody>
