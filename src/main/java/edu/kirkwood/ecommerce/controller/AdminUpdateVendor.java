@@ -11,53 +11,36 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/add-vendor")
-public class AdminAddVendor extends HttpServlet {
+@WebServlet(value="/edit-vendor")
+public class AdminUpdateVendor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("WEB-INF/ecommerce/admin-add-vendor.jsp").forward(req, resp);
+        String vend_id = req.getParameter("vend_id");
+        Vendor vendor = VendorDAO.getVendor(vend_id);
+        req.setAttribute("vend_id", vend_id);
+        req.setAttribute("vendor", vendor);
+        req.getRequestDispatcher("WEB-INF/ecommerce/admin-update-vendor.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String vendorId = req.getParameter("vendorId");
         String vendorName = req.getParameter("vendorName");
+        String country = req.getParameter("country");
         String streetAddress = req.getParameter("streetAddress");
-        String zip = req.getParameter("zip");
         String city = req.getParameter("city");
         String state = req.getParameter("state");
-        String country = req.getParameter("country");
-        req.setAttribute("vendorId", vendorId);
-        req.setAttribute("vendorName", vendorName);
-        req.setAttribute("streetAddress", streetAddress);
-        req.setAttribute("zip", zip);
-        req.setAttribute("city", city);
-        req.setAttribute("state", state);
-        req.setAttribute("country", country);
+        String zip = req.getParameter("zip");
 
-        Vendor vendor = new Vendor();
+        Vendor newVendor = new Vendor();
         boolean validationError = false;
 
-        Vendor vendorFromDB = VendorDAO.getVendor(vendorId);
-        if (vendorFromDB != null) {
-            validationError = true;
-            req.setAttribute("vendorIdError", true);
-            req.setAttribute("vendorIdMessage", "That vendor already exists");
-        } else {
-            try {
-                vendor.setVend_id(vendorId);
-                req.setAttribute("vendorIdError", false);
-                req.setAttribute("vendorIdMessage", "Looks good!");
-            } catch (IllegalArgumentException e) {
-                validationError = true;
-                req.setAttribute("vendorIdError", true);
-                req.setAttribute("vendorIdMessage", e.getMessage());
-            }
-        }
+        Vendor originalVendor = VendorDAO.getVendor(vendorId);
+        // TODO: validate originalVendor, verify the hidden field is not modified
 
 
         try {
-            vendor.setVend_name(vendorName);
+            newVendor.setVend_name(vendorName);
             req.setAttribute("vendorNameError", false);
             req.setAttribute("vendorNameMessage", "Looks good!");
         } catch (IllegalArgumentException e) {
@@ -124,18 +107,19 @@ public class AdminAddVendor extends HttpServlet {
             req.setAttribute("stateMessage", e.getMessage());
         }
 
-        vendor.setAddress(address);
+        newVendor.setAddress(address);
 
         if(!validationError) {
-            boolean vendorAdded = VendorDAO.addVendor(vendor);
-            req.setAttribute("vendorAdded", vendorAdded);
-            if(vendorAdded) {
-                req.setAttribute("vendorAddedMessage", "Successfully added vendor!");
+            boolean vendorUpdated = VendorDAO.updateVendor(originalVendor, newVendor);
+            req.setAttribute("vendorUpdated", vendorUpdated);
+            if(vendorUpdated) {
+                req.setAttribute("vendorUpdatedMessage", "Successfully updated vendor!");
             } else {
-                req.setAttribute("vendorAddedMessage", "Error adding vendor.");
+                req.setAttribute("vendorUpdatedMessage", "Error updating vendor.");
             }
         }
-
-        req.getRequestDispatcher("WEB-INF/ecommerce/admin-add-vendor.jsp").forward(req, resp);
+        req.setAttribute("vend_id", vendorId);
+        req.setAttribute("vendor", newVendor);
+        req.getRequestDispatcher("WEB-INF/ecommerce/admin-update-vendor.jsp").forward(req, resp);
     }
 }

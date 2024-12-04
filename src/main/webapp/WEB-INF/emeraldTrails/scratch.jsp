@@ -1,24 +1,61 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow" style="z-index: 2;">
-    <div class="container-fluid">
-        <img src="images/emerald-park-green.png" style="width:250px; margin-left: 3rem">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="float:right">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 3rem">
-                <li class="nav-item" style="font-size: 1rem">
-                    <a class="nav-link active" aria-current="page" href="view-trails">Home</a>
-                </li>
-                <li class="nav-item" style="font-size: 1rem">
-                    <a class="nav-link" href="view-trails">Trails</a>
-                </li>
-                <li class="nav-item" style="font-size: 1rem">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item" style="font-size: 1rem">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
+<%@ page import="edu.kirkwood.emeraldTrails.model.Trail" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!doctype html>
+<html lang="en">
+
+<!-- HEAD -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Emerald Park</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<!-- Start BODY -->
+<body>
+<!-- Navigation (main and park) -->
+<%@include file="../../main-nav.jsp" %>
+<%@include file="park-nav.jsp" %>
+
+<!-- Header -->
+<h2 style="margin-left: 4rem; margin-top: 2rem; margin-bottom: 2rem;">Trails</h2>
+
+
+<!-- Cards -->
+<div class="container">
+    <div class="row">
+        <%
+            List<Trail> trails = (List<Trail>) request.getAttribute("trails");
+            if (trails == null || trails.isEmpty()) {
+        %>
+        <div class="col-12">
+            <p class="text-center">No trails available.</p>
         </div>
+        <%
+        } else {
+            for (Trail trail : trails) {
+        %>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="<%= trail.getTrail_image() %>" class="card-img-top" alt="<%=trail.getTrail_name()%> hiking trail at Emerald Park.">
+                <div class="card-body">
+                    <h5 class="card-title"><%= trail.getTrail_name() %> Trail</h5>
+                    <p class="card-text"><small class="text-muted"><%= trail.getTrail_distance() %> miles | <%= trail.getTrail_difficulty() %></small></p>
+                    <p class="card-text"><%= trail.getTrail_description() %></p>
+                </div>
+            </div>
+        </div>
+        <%
+                }
+            }
+        %>
     </div>
-</nav>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
