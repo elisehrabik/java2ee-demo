@@ -23,6 +23,10 @@ public class Trail {
         this.trail_image = trail_image;
     }
 
+    public Trail(){
+
+    };
+
     public String getTrail_name() {
         return trail_name;
     }

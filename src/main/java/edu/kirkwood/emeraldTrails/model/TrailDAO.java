@@ -1,5 +1,6 @@
 package edu.kirkwood.emeraldTrails.model;
 
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static edu.kirkwood.shared.MySQL_Connect.getConnection2;
 
@@ -43,7 +45,7 @@ public class TrailDAO {
         try (Connection connection = getConnection2()) {
             CallableStatement statement = connection.prepareCall("{CALL sp_get_all_trails_admin()}"); // call sp
             ResultSet rs = statement.executeQuery(); // execute query
-            while (rs.next()) { // gets all the data
+            while (rs.next()) {
                 int trail_id = rs.getInt("trail_id");
                 String trail_name = rs.getString("trail_name");
                 double trail_distance = rs.getDouble("trail_distance");
@@ -59,5 +61,37 @@ public class TrailDAO {
             throw new RuntimeException("Query error - " + e.getMessage());
         }
         return trails;
+    }
+
+    public static boolean addTrail(Trail trail) {
+        try (Connection connection = getConnection2()) {
+            CallableStatement statement = connection.prepareCall("{CALL sp_add_trail_admin(?, ?, ?, ?, ?, ?, ?,?)}");
+            statement.setInt(1, trail.getTrail_id());
+            statement.setString(2, trail.getTrail_name());
+            statement.setDouble(3, trail.getTrail_distance());
+
+            // Used ChatGPT to convert TrailDifficulty to a database-compatible string
+            if (trail.getTrail_difficulty() != null) {
+                statement.setString(4, trail.getTrail_difficulty().toDatabaseString());
+            } else {
+                statement.setNull(4, java.sql.Types.VARCHAR);
+            }
+
+            // Used ChatGPT to convert LocalTime to SQL Time
+            if (trail.getTrail_time() != null) {
+                statement.setTime(5, java.sql.Time.valueOf(trail.getTrail_time()));
+            } else {
+                statement.setNull(5, java.sql.Types.TIME);
+            }
+
+            statement.setString(6, trail.getTrail_description());
+            statement.setBoolean(7, trail.getAllows_bikes());
+            statement.setString(8, trail.getTrail_image());
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 }

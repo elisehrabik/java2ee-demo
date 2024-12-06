@@ -16,6 +16,7 @@
 <%@include file="../../main-nav.jsp" %>
 <%@include file="park-nav.jsp" %>
 <div class="container py-4">
+    <a href="admin-add-trail" class="btn btn-primary" role="button">Add New Trail</a>
     <h2>Admin - All Trails</h2>
     <div class="table-responsive small">
         <table class="table table-striped table-sm">
