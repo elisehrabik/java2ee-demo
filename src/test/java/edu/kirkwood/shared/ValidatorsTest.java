@@ -30,4 +30,12 @@ class ValidatorsTest {
         assertFalse(Validators.isValidEmail("e@h"));
         assertFalse(Validators.isValidEmail(""));
     }
+
+    @Test
+    void isValidURL(){
+        assertTrue(Validators.isValidURL("http://www.google.com"));
+        assertTrue(Validators.isValidURL("https://www.google.com"));
+
+
+    }
 }
