@@ -38,6 +38,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="contact">Contact</a></li>
                         <li><a class="dropdown-item" href="group-chat">Group Chat</a></li>
+                        <li><a class="dropdown-item" href="movies">Movies</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
