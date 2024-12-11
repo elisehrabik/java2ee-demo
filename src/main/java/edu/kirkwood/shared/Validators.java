@@ -45,10 +45,10 @@ public class Validators {
         return matcher.matches();
     }
 
-    // Source: https://stackoverflow.com/a/8234912/27372300
-    public static boolean isValidURL(String trail_image) {
+    // Source: https://chatgpt.com/share/6758fbb8-4c74-8006-a1ff-ef08b23f0ceb
+    public static boolean isValidImage(String trail_image) {
         trail_image = trail_image.trim();
-        String regex = "((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)";
+        String regex = "^(?:[a-zA-Z]:\\\\|\\.\\/|\\/)?(?:[\\w\\s-]+\\/)*[\\w\\s-]+\\.(?:jpg|jpeg|png|gif|bmp|svg)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(trail_image);
         return matcher.matches();

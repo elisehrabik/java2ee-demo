@@ -32,10 +32,12 @@ class ValidatorsTest {
     }
 
     @Test
-    void isValidURL(){
-        assertTrue(Validators.isValidURL("http://www.google.com"));
-        assertTrue(Validators.isValidURL("https://www.google.com"));
-
-
+    void isValidImage(){
+        assertTrue(Validators.isValidImage("image.png"));
+        assertTrue(Validators.isValidImage("images/image.png"));
+        assertTrue(Validators.isValidImage("./folder/subfolder/image.gif"));
+        assertFalse(Validators.isValidImage("image.txt"));
+        assertFalse(Validators.isValidImage("images/image"));
+        assertFalse(Validators.isValidImage("C://Windows\\\\image.svg"));
     }
 }

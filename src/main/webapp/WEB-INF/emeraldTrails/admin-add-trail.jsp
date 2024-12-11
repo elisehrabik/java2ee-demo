@@ -20,14 +20,14 @@
         </div>
     </c:if>
     <form class="row g-3" method="POST" action="admin-add-trail">
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <label for="trailId" class="form-label">Trail Id</label>
             <input type="text" class="form-control <c:choose><c:when test='${trailIdError == true}'>is-invalid</c:when><c:when test='${trailIdError == false}'>is-valid</c:when><c:otherwise></c:otherwise></c:choose>" id="trailId" name="trailId" value="${trailId}">
             <div class="<c:choose><c:when test='${trailIdError == true}'>invalid-feedback</c:when><c:when test='${trailIdError == false}'>valid-feedback</c:when><c:otherwise></c:otherwise></c:choose>">
                 ${trailIdMessage}
             </div>
-        </div>
-        <div class="col-md-9">
+        </div> -->
+        <div class="col-md-12">
             <label for="trailName" class="form-label">Trail Name</label>
             <input type="text" class="form-control <c:choose><c:when test='${trailNameError == true}'>is-invalid</c:when><c:when test='${trailNameError == false}'>is-valid</c:when><c:otherwise></c:otherwise></c:choose>" id="trailName" name="trailName" value="${trailName}">
             <div class="<c:choose><c:when test='${trailNameError == true}'>invalid-feedback</c:when><c:when test='${trailNameError == false}'>valid-feedback</c:when><c:otherwise></c:otherwise></c:choose>">
