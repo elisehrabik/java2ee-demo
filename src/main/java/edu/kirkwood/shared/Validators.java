@@ -53,4 +53,14 @@ public class Validators {
         Matcher matcher = pattern.matcher(trail_image);
         return matcher.matches();
     }
+
+    public static boolean isValidPhone (String US_phone) {
+        US_phone = US_phone.trim();
+        String regex = "^\\D?(\\d{3})\\D?\\D?(\\d{3})\\D?(\\d{4})$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(US_phone);
+        return matcher.matches();
+    }
+
+
 }

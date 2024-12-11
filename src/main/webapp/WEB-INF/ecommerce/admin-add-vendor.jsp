@@ -71,6 +71,13 @@
                 ${zipMessage}
             </div>
         </div>
+        <div class="col-md-4">
+            <label for="US_phone" class="form-label">Phone Number</label>
+            <input type="text" class="form-control <c:choose><c:when test="${phoneError == true}">is-invalid</c:when><c:when test="${phoneError == false}">is-valid</c:when><c:otherwise></c:otherwise></c:choose>" id="US_phone" name="US_phone" value="${US_phone}">
+            <div class="<c:choose><c:when test="${phoneError == true}">invalid-feedback</c:when><c:when test="${phoneError == false}">valid-feedback</c:when><c:otherwise></c:otherwise></c:choose>">
+                ${phoneMessage}
+            </div>
+        </div>
 
         <div class="col-12">
             <button class="btn btn-dark" type="submit">Submit form</button>

@@ -3,6 +3,7 @@ package edu.kirkwood.ecommerce.controller;
 import edu.kirkwood.ecommerce.model.Address;
 import edu.kirkwood.ecommerce.model.Vendor;
 import edu.kirkwood.ecommerce.model.VendorDAO;
+import edu.kirkwood.shared.Validators;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,6 +25,7 @@ public class AdminAddVendor extends HttpServlet {
         String vendorName = req.getParameter("vendorName");
         String streetAddress = req.getParameter("streetAddress");
         String zip = req.getParameter("zip");
+        String US_phone = req.getParameter("US_phone");
         String city = req.getParameter("city");
         String state = req.getParameter("state");
         String country = req.getParameter("country");
@@ -31,9 +33,11 @@ public class AdminAddVendor extends HttpServlet {
         req.setAttribute("vendorName", vendorName);
         req.setAttribute("streetAddress", streetAddress);
         req.setAttribute("zip", zip);
+        req.setAttribute("US_phone", US_phone);
         req.setAttribute("city", city);
         req.setAttribute("state", state);
         req.setAttribute("country", country);
+
 
         Vendor vendor = new Vendor();
         boolean validationError = false;
@@ -64,6 +68,19 @@ public class AdminAddVendor extends HttpServlet {
             validationError = true;
             req.setAttribute("vendorNameError", true);
             req.setAttribute("vendorNameMessage", e.getMessage());
+        }
+        
+        try {
+            if (US_phone == null || !Validators.isValidPhone(US_phone)) {
+                throw new IllegalArgumentException("Invalid zip");
+            } else {
+                req.setAttribute("countryError", false);
+                req.setAttribute("countryMessage", "Looks good!");
+            }
+        }catch (IllegalArgumentException e) {
+            validationError = true;
+            req.setAttribute("phoneError", true);
+            req.setAttribute("phoneMessage", "Phone number is required");
         }
 
         Address address = new Address();

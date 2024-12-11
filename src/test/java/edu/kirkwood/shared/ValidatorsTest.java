@@ -40,4 +40,20 @@ class ValidatorsTest {
         assertFalse(Validators.isValidImage("images/image"));
         assertFalse(Validators.isValidImage("C://Windows\\\\image.svg"));
     }
+
+    @Test
+    void isValidPhone(){
+        assertTrue(Validators.isValidPhone("1234567890"));
+        assertTrue(Validators.isValidPhone("(123)4567890"));
+        assertTrue(Validators.isValidPhone("(123)-456-7890"));
+        assertTrue(Validators.isValidPhone("123-456-7890"));
+        assertTrue(Validators.isValidPhone("123.456.7890"));
+        assertTrue(Validators.isValidPhone("123 456 7890"));
+        assertFalse(Validators.isValidPhone("12345678"));
+        assertFalse(Validators.isValidPhone("(123)-45-67890"));
+        assertFalse(Validators.isValidPhone("123--456--7890"));
+        assertFalse(Validators.isValidPhone("+1 (123) 456-7890"));
+        assertFalse(Validators.isValidPhone("123.4567.890"));
+        assertFalse(Validators.isValidPhone("abc-123-4567"));
+    }
 }
